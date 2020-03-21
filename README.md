@@ -33,18 +33,18 @@ cd hello-world
 5. After these step your `angular.json` is update with a new builder:
 
 ```json
-
-"deploy": {
+  "deploy": {
     "builder": "ngx-ec2-deploy:deploy",
     "options": {
-      "host": "Your host",
-      "username": "Your username ",
-      "remotePath": "your remote path",
-      "password": "your password",
-      "privateKey": "your private key"
+      "production": {
+        "host": "ec2-3-6-122-80.ap-south-1.compute.amazonaws.com",
+        "username": "ec2-user",
+        "remotePath": "scripts",
+        "privateKey": "ssh/voopik-mumbai.pem",
+        "postDeploy": "sudo pm2 restart all"
+      }
     }
   }
-
 ```
 
 6. Run `ng deploy` to deploy your application to Amazon EC2.

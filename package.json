@@ -1,6 +1,6 @@
 {
   "name": "ngx-ec2-deploy",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "description": "Deploy Nestjs app to Amazon EC2 directly from the Angular CLI",
   "main": "dist/index.js",
   "builders": "builders.json",
@@ -13,10 +13,14 @@
   "license": "MIT",
   "keywords": [
     "angular",
-    "builder",
-    "custom",
-    "uglify",
-    "terser"
+    "schematics",
+    "cli",
+    "angular-cli",
+    "amazon",
+    "aws",
+    "deploy",
+    "ng deploy",
+    "ngx-ec2-deploy"
   ],
   "dependencies": {
     "node-ssh": "^8.0.0",

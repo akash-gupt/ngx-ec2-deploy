@@ -26,6 +26,13 @@ export default createBuilder<any>(
       }
     } else {
       const configuration = builderConfig.configuration ? builderConfig.configuration : 'production'
+      const configuratinOption = builderConfig[configuration]
+      if (!configuratinOption) {
+        return {
+          error: `❌  Missing settings for ${configuration}`,
+          success: false,
+        }
+      }
 
       const overrides = {
         // this is an example how to override the workspace set of options
@@ -46,18 +53,26 @@ export default createBuilder<any>(
     if (buildResult.success) {
       context.logger.info(`✔ Build Completed`)
       const filesPath = buildResult.outputPath as string
+      const configuration = builderConfig.configuration ? builderConfig.configuration : 'production'
+      const configuratinOption = builderConfig[configuration]
+      if (!configuratinOption) {
+        return {
+          error: `❌  Missing settings for ${configuration}`,
+          success: false,
+        }
+      }
 
-      if (getHost(builderConfig) || getUsername(builderConfig)) {
+      if (getHost(configuratinOption) || getUsername(configuratinOption)) {
         context.logger.info('Start uploading files...')
         const client = new Sftp()
         const uploader = new Uploader(context, client)
-        await uploader.upload(filesPath, builderConfig)
+        await uploader.upload(filesPath, configuratinOption)
         context.logger.info('✔ Finished uploading files...')
 
-        if (getPostDeployCommand(builderConfig)) {
+        if (getPostDeployCommand(configuratinOption)) {
           const sshClient = new Client()
           const command = new Command(context, sshClient)
-          await command.run(getPostDeployCommand(builderConfig), builderConfig)
+          await command.run(getPostDeployCommand(configuratinOption), configuratinOption)
 
           context.logger.info('✔ Post Deploy executed successfully...')
         }
