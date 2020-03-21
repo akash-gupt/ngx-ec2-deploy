@@ -1,4 +1,4 @@
-# NGX-AWS-DEPLOY
+# NGX-EC2-DEPLOY
 
 ☁️🚀 Deploy your Nodejs app to Amazon EC2 directly from the Angular CLI 🚀☁️
 
