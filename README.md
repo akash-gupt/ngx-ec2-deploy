@@ -1,72 +1,96 @@
-# angular-builder-custom-terser-options
+# NGX-AWS-DEPLOY
 
-Custom Angular builder that allows Terser (Uglify) customization. It's a sub-class of Angular's default builder and it does a very small customization of its logic by extending final webpack config with your custom options for Terser.
+☁️🚀 Deploy your Nodejs app to Amazon EC2 directly from the Angular CLI 🚀☁️
 
-**This project is not maintained. Try https://github.com/just-jeb/angular-builders instead**
+## Quick Start
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+1. Install the latest version of Angular cli
 
-- [Quick start](#quick-start)
-- [Common use-cases](#common-use-cases)
-  - [Keep class names](#keep-class-names)
+```sh
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+ yarn global add @angular/cli
 
-## Quick start
+```
 
-1. Install
+2. Create a new Angular project
 
-   ```
-   npm i -D angular-builder-custom-terser-options
-   ```
+```sh
 
-   > For a builder compatible with Angular 7 run `npm i -D angular-builder-custom-terser-options@1`
+ng new hello-world --defaults
 
-1. Add builders from this package to your `angular.json`.
+cd hello-world
 
-   1. Set `projects.yourProjectName.architect.build` to `angular-builder-custom-terser-options:browser-custom-terser`
-   1. Set `projects.yourProjectName.architect.build.configurations.production.optimization` to `true`
-   1. Set `projects.yourProjectName.architect.build.configurations.production.terserOptions` to an object with any minify options supported by Terser. You can find the list of available options [here](https://github.com/terser-js/terser#minify-options).
-   1. Set `projects.yourProjectName.architect.serve` to `angular-builder-custom-terser-options:dev-server-custom-terser`
+```
 
-   ```js
-   {
-     // ... rest of the default config ,
-     "projects": {
-       "yourProjectName": {
-         "architect": {
-           "build": {
-             // Set our custom builder here
-             "builder": "angular-builder-custom-terser-options:browser-custom-terser",
-             "options": {
-               // Your default options. Leave it as is
-             },
-             "configurations": {
-               "production": {
-                 // Add any options supported by Terser here
-                 "terserOptions": {
-                   "keep_classnames": true
-                 },
-                 // Enable optimization to enable Terser itself
-                 "optimization": true
-               }
-             }
-           },
-           "serve": {
-             // Set our custom builder here
-             "builder": "angular-builder-custom-terser-options:dev-server-custom-terser"
-             // Rest of the config. Leave it as is
-           }
-         }
-       }
-     }
-   }
-   ```
+3. Add `ngx-ec2-deploy` to your project
 
-## Common use-cases
+```sh
 
-### Keep class names
+ yarn add ngx-ec2-deploy
 
-If you set `target` in your tsconfig.json to `es6` or higher, set your `terserOptions` to `{ "keep_classnames": true }`.
-If you set `target` in your tsconfig.json to `es5`, set your `terserOptions` to `{ "keep_fnames": true }`.
+```
+
+5. After these step your `angular.json` is update with a new builder:
+
+```json
+
+"deploy": {
+    "builder": "ngx-ec2-deploy:deploy",
+    "options": {
+      "host": "Your host",
+      "username": "Your username ",
+      "remotePath": "your remote path",
+      "password": "your password",
+      "privateKey": "your private key"
+    }
+  }
+
+```
+
+6. Run `ng deploy` to deploy your application to Amazon EC2.
+
+🚀**_Happy deploying!_** 🚀
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+The builder is located in the `builder` folder.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[MIT](./LICENSE)
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+
+<!-- prettier-ignore-start -->
+
+<!-- markdownlint-disable -->
+
+<table>
+
+<tr>
+
+<td  align="center"><a  href="https://techaks.github.io"><img  src="https://findakash.com/assets/img/mypic.jpg"  width="100px;"  alt=""/><br  /><sub><b>Akash Gupta</b></sub></a><br  /><a  href="https://github.com/techaks/ngx-ec2-deploy/commits?author=Akash"  title="Code">💻</a>  <a  href="#content-Akash"  title="Content">🖋</a>  <a  href="https://github.com/techaks/ngx-ec2-deploy/pulls"  title="Reviewed Pull Requests">👀</a></td>
+
+
+
+</tr>
+
+</table>
+
+  
+
+<!-- markdownlint-enable -->
+
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

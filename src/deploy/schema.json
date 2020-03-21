@@ -1,0 +1,38 @@
+{
+  "id": "Schema",
+  "title": "schema",
+  "description": "Deployment of Angular CLI applications to AWS",
+  "properties": {
+    "configuration": {
+      "type": "string",
+      "default": "production",
+      "description": "A named build target, as specified in the `configurations` section of angular.json. Each named target is accompanied by a configuration of option defaults for that target. Same as `ng build --configuration=XXX`.",
+      "alias": "c"
+    },
+    "noBuild": {
+      "type": "boolean",
+      "default": false,
+      "description": "Skip build process during deployment."
+    },
+    "host": {
+      "type": "string",
+      "description": "The host url from AWS EC2."
+    },
+    "username": {
+      "type": "string",
+      "description": "The username from AWS EC2."
+    },
+    "password": {
+      "type": "string",
+      "description": "The password from AWS EC2."
+    },
+    "remotePath": {
+      "type": "string",
+      "description": "Remote directory where you want the files"
+    },
+    "privateKey": {
+      "type": "string",
+      "description": "private key from AWS EC2."
+    }
+  }
+}

@@ -1,14 +1,9 @@
 {
   "builders": {
-    "browser-custom-terser": {
-      "implementation": "./dist/src/browser",
-      "schema": "./dist/src/browser/schema.json",
-      "description": "Build a browser app with customized Terser options."
-    },
-    "dev-server-custom-terser": {
-      "implementation": "./dist/src/dev-server",
-      "schema": "./dist/src/dev-server/schema.json",
-      "description": "Dev server with customized Terser options."
+    "deploy": {
+      "implementation": "./dist/src/deploy",
+      "schema": "./dist/src/deploy/schema.json",
+      "description": "Deploy to AWS EC2."
     }
   }
 }

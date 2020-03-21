@@ -1,2 +1,1 @@
-export * from './src/browser'
-export * from './src/dev-server'
+export * from './src/deploy'
