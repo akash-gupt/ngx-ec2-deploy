@@ -33,6 +33,10 @@
     "privateKey": {
       "type": "string",
       "description": "private key from AWS EC2."
+    },
+    "postDeploy": {
+      "type": "string",
+      "description": "Commands to be executed on the server after deployment."
     }
   }
 }

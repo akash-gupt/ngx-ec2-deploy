@@ -17,3 +17,7 @@ export const getRemotePath = (builderConfig: any): string => {
 export const getPrivateKey = (builderConfig: any): string => {
   return builderConfig.privateKey as string
 }
+
+export const getPostDeployCommand = (builderConfig: any): string => {
+  return builderConfig.postDeploy as string
+}

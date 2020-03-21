@@ -1,9 +1,11 @@
 import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect';
 import { experimental, json, normalize } from '@angular-devkit/core';
 import { NodeJsSyncHost } from '@angular-devkit/core/node';
+import * as Client from 'node-ssh';
 import * as Sftp from 'ssh2-sftp-client';
 
-import { getHost, getUsername } from './config';
+import { Command } from './command';
+import { getHost, getPostDeployCommand, getUsername } from './config';
 import { Uploader } from './uploader';
 
 export default createBuilder<any>(
@@ -51,10 +53,19 @@ export default createBuilder<any>(
         const uploader = new Uploader(context, client)
         await uploader.upload(filesPath, builderConfig)
         context.logger.info('✔ Finished uploading files...')
+
+        if (getPostDeployCommand(builderConfig)) {
+          const sshClient = new Client()
+          const command = new Command(context, sshClient)
+          await command.run(getPostDeployCommand(builderConfig), builderConfig)
+
+          context.logger.info('✔ Post Deploy executed successfully...')
+        }
+
         return { success: true }
       } else {
         return {
-          error: `❌  Missing authentication settings for AWS`,
+          error: `❌  Missing settings for Authentication`,
           success: false,
         }
       }
